@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
+  <meta name="theme-color" content="#0f1419">
+  <title>Stock Chart</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2326a69a' d='M3 17l5-6 4 4 7-9 2 1.5-9 11-4-4-3.5 4z'/></svg>">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">📈 <span>StockChart</span></div>
+    <div class="search" role="combobox" aria-haspopup="listbox" aria-owns="suggestions">
+      <input id="search" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Search stock, e.g. Apple or TSLA" aria-label="Search stock" aria-autocomplete="list" aria-controls="suggestions">
+      <ul id="suggestions" role="listbox" hidden></ul>
+    </div>
+    <button id="themeBtn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+  </header>
+
+  <main>
+    <section class="quote" id="quote">
+      <div class="q-title">
+        <h1 id="qSymbol">—</h1>
+        <span id="qName" class="muted"></span>
+      </div>
+      <div class="q-price">
+        <span id="qPrice">—</span>
+        <span id="qChange" class="chg"></span>
+        <span id="qRangeLabel" class="muted small"></span>
+      </div>
+      <div id="qMeta" class="q-meta muted small"></div>
+    </section>
+
+    <section class="toolbar">
+      <div class="seg" id="ranges" role="group" aria-label="Date range">
+        <button data-range="1d">1D</button>
+        <button data-range="5d">5D</button>
+        <button data-range="1w">1W</button>
+        <button data-range="1m">1M</button>
+        <button data-range="6m">6M</button>
+        <button data-range="ytd">YTD</button>
+        <button data-range="1y">1Y</button>
+        <button data-range="5y">5Y</button>
+        <button data-range="max">MAX</button>
+      </div>
+      <div class="tools">
+        <div class="seg" id="types" role="group" aria-label="Chart type">
+          <button data-type="candles" title="Candlesticks">Candles</button>
+          <button data-type="area" title="Area">Area</button>
+          <button data-type="line" title="Line">Line</button>
+          <button data-type="bars" title="OHLC bars">Bars</button>
+        </div>
+        <label class="chk"><input type="checkbox" id="optVolume" checked> Volume</label>
+        <label class="chk"><input type="checkbox" id="optSma20"> <i class="dot sma20"></i>MA20</label>
+        <label class="chk"><input type="checkbox" id="optSma50"> <i class="dot sma50"></i>MA50</label>
+        <label class="chk"><input type="checkbox" id="optLog"> Log</label>
+        <button id="fitBtn" class="icon-btn" title="Reset zoom" aria-label="Reset zoom">⤢</button>
+        <button id="fullBtn" class="icon-btn" title="Fullscreen" aria-label="Fullscreen">⛶</button>
+      </div>
+    </section>
+
+    <section class="chart-wrap" id="chartWrap">
+      <div id="legend" class="legend"></div>
+      <div id="chart"></div>
+      <div id="status" class="status" hidden></div>
+    </section>
+
+    <p class="hint muted small">
+      Drag to pan · scroll / pinch to zoom · hover or tap for values<span class="desktop-only"> · <kbd>Shift</kbd>+drag to measure</span>.
+      Data: Yahoo Finance (may be delayed). Auto-refreshes every 30s.
+    </p>
+  </main>
+
+  <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
